@@ -6,14 +6,10 @@ from dotenv import load_dotenv, dotenv_values
 
 if not exists('.env'):
     with open('.env', 'w') as f:
-        f.write(
-            'YEAR="{year}"\nSESSION="{session}"'.format(
-                year=date.today().year, session=input('Enter your session cookie: ')
-            )
-        )
+        f.write('SESSION="{session}"'.format(session=input('Enter your session cookie: ')))
 
 load_dotenv()
-CURRENT_YEAR = dotenv_values('.env')['YEAR']
+CURRENT_YEAR = date.today().year
 DATA_FILE_TEMPLATE = '{year}/data/{day}.data'
 URL_TEMPLATE = 'https://adventofcode.com/{year}/day/{day}/input'
 
