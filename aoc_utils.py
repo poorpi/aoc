@@ -39,10 +39,17 @@ def part1(data):
 def part2(data):
     return None
 
-    
+
+run_sample = True
+sample = \'\'\'
+\'\'\'
 data = aoc.get_data({day}, {year})
-print('Part 1:', part1(data))
-print('Part 2:', part2(data))
+if run_sample:
+    print('Part 1:', part1(sample))
+    print('Part 2:', part2(sample))
+else:
+    print('Part 1:', part1(data))
+    print('Part 2:', part2(data))
 '''.format(
                     year=year, day=day
                 )
