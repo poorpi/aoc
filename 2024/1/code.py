@@ -10,16 +10,31 @@ import aoc_utils as aoc
 
 
 def part1(data):
-    return None
+    left = []
+    right = []
+    for line in data.splitlines():
+        left.append(int(line.split(' ')[0]))
+        right.append(int(line.split(' ')[-1]))
+    return sum([abs(l - r) for l, r in zip(sorted(left), sorted(right))])
 
 
 def part2(data):
-    return None
+    left = []
+    right = []
+    for line in data.splitlines():
+        left.append(int(line.split(' ')[0]))
+        right.append(int(line.split(' ')[-1]))
+
+    return sum([x * right.count(x) for x in left])
 
 
 run_sample = False
-sample = '''
-'''
+sample = '''3   4
+4   3
+2   5
+1   3
+3   9
+3   3'''
 data = aoc.get_data(1, 2024)
 if run_sample:
     print('Part 1:', part1(sample))
