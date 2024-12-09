@@ -56,10 +56,10 @@ def part1(data):
                 if b[0] - o[0] >= 0 and b[1] + o[1] < cols:
                     antinodes.add((b[0] - o[0], b[1] + o[1]))
 
-    for a in antinodes:
-        d[a[1] * rows + a[0]] = '#'
-    for x in range(rows):
-        print(''.join(d[x * rows : (x + 1) * rows]))
+    # for a in antinodes:
+    #     d[a[1] * rows + a[0]] = '#'
+    # for x in range(rows):
+    #     print(''.join(d[x * rows : (x + 1) * rows]))
     return len(antinodes)
 
 
@@ -125,10 +125,10 @@ def part2(data):
                     if not added:
                         break
 
-    for a in antinodes:
-        d[a[1] * rows + a[0]] = '#'
-    for x in range(rows):
-        print(''.join(d[x * rows : (x + 1) * rows]))
+    # for a in antinodes:
+    #     d[a[1] * rows + a[0]] = '#'
+    # for x in range(rows):
+    #     print(''.join(d[x * rows : (x + 1) * rows]))
     return len(antinodes)
 
 
