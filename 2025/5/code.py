@@ -10,15 +10,69 @@ import aoc_utils as aoc
 
 
 def part1(data):
-    pass
+    sum = 0
+    fresh_ids = []
+    ingredient_ids = []
+    read_ingredients = False
+    data.strip()
+    for line in data.splitlines():
+        if line == '':
+            read_ingredients = True
+            continue
+        if not read_ingredients:
+            split = line.split('-')
+            fresh_ids.append((int(split[0]), int(split[1])))
+        else:
+            ingredient_ids.append(int(line))
+
+    for ingredient in ingredient_ids:
+        for fresh in fresh_ids:
+            if fresh[0] <= ingredient <= fresh[1]:
+                sum += 1
+                break
+    return sum
 
 
 def part2(data):
-    pass
+    fresh_ids = []
+    data.strip()
+    for line in data.splitlines():
+        if line == '':
+            break
+        split = line.split('-')
+        fresh_ids.append((int(split[0]), int(split[1])))
+
+    fresh_ids = sorted(fresh_ids, key=lambda x: x[0])
+
+    merged_fresh_ids = []
+    current_start, current_end = fresh_ids[0]
+    for start, end in fresh_ids[1:]:
+        if start <= current_end:
+            current_end = max(current_end, end)
+        else:
+            merged_fresh_ids.append((current_start, current_end))
+            current_start = start
+            current_end = end
+
+    merged_fresh_ids.append((current_start, current_end))
+
+    l = sum(end - start + 1 for start, end in merged_fresh_ids)
+    return l
 
 
-run_sample = True
-sample = ''''''
+
+run_sample = False
+sample = '''3-5
+10-14
+16-20
+12-18
+
+1
+5
+8
+11
+17
+32'''
 data = aoc.get_data(5, 2025)
 if run_sample:
     print('Part 1:', part1(sample))
