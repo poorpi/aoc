@@ -26,6 +26,8 @@ def part1(data):
         else:
             ingredient_ids.append(int(line))
 
+    fresh_ids = utils.merge_intervals(fresh_ids)
+
     for ingredient in ingredient_ids:
         for fresh in fresh_ids:
             if fresh[0] <= ingredient <= fresh[1]:
@@ -63,6 +65,7 @@ sample = '''3-5
 32'''
 data = aoc.get_data(5, 2025)
 if run_sample:
+
     print('Part 1:', part1(sample))
     print('Part 2:', part2(sample))
 else:

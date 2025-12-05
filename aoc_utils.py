@@ -34,11 +34,15 @@ import utils
 
 
 def part1(data):
-    return None
+    data.strip()
+    for line in data.splitlines():
+        pass
 
 
 def part2(data):
-    return None
+    data.strip()
+    for line in data.splitlines():
+        pass
 
 
 run_sample = True

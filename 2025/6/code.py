@@ -10,11 +10,15 @@ import aoc_utils as aoc
 
 
 def part1(data):
-    pass
+    data.strip()
+    for line in data.splitlines():
+        pass
 
 
 def part2(data):
-    pass
+    data.strip()
+    for line in data.splitlines():
+        pass
 
 
 run_sample = True
