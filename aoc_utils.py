@@ -30,6 +30,7 @@ if root_dir not in sys.path:
     sys.path.insert(0, root_dir)
 
 import aoc_utils as aoc
+import utils
 
 
 def part1(data):

@@ -7,6 +7,7 @@ if root_dir not in sys.path:
     sys.path.insert(0, root_dir)
 
 import aoc_utils as aoc
+import utils
 
 
 def part1(data):
@@ -42,23 +43,10 @@ def part2(data):
         split = line.split('-')
         fresh_ids.append((int(split[0]), int(split[1])))
 
-    fresh_ids = sorted(fresh_ids, key=lambda x: x[0])
+    fresh_ids = utils.merge_intervals(fresh_ids)
 
-    merged_fresh_ids = []
-    current_start, current_end = fresh_ids[0]
-    for start, end in fresh_ids[1:]:
-        if start <= current_end:
-            current_end = max(current_end, end)
-        else:
-            merged_fresh_ids.append((current_start, current_end))
-            current_start = start
-            current_end = end
-
-    merged_fresh_ids.append((current_start, current_end))
-
-    l = sum(end - start + 1 for start, end in merged_fresh_ids)
+    l = sum(end - start + 1 for start, end in fresh_ids)
     return l
-
 
 
 run_sample = False

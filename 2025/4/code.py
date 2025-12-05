@@ -7,26 +7,7 @@ if root_dir not in sys.path:
     sys.path.insert(0, root_dir)
 
 import aoc_utils as aoc
-
-
-MOORE = [
-    (-1,-1), (0,-1), (1,-1),
-    (-1, 0),         (1, 0),
-    (-1, 1), (0, 1), (1, 1)
-]
-
-
-def neighborhood(grid, x, y, offsets=None, wrap=False):
-    offsets = offsets or MOORE
-    h, w = len(grid), len(grid[0])
-    for dx, dy in offsets:
-        nx, ny = x + dx, y + dy
-        if wrap:
-            nx %= w
-            ny %= h
-        elif not (0 <= nx < w and 0 <= ny < h):
-            continue
-        yield grid[ny][nx]
+import utils
 
 
 def part1(data):
@@ -42,7 +23,7 @@ def part1(data):
             cell = grid[y][x]
             if cell != '@':
                 continue
-            neighbors = list(neighborhood(grid, x, y))
+            neighbors = list(utils.neighborhood(grid, x, y))
             count = 0
             for n in neighbors:
                 if n == '@':
@@ -68,7 +49,7 @@ def part2(data):
                 cell = grid[y][x]
                 if cell != '@':
                     continue
-                neighbors = list(neighborhood(grid, x, y))
+                neighbors = list(utils.neighborhood(grid, x, y))
                 count = 0
                 for n in neighbors:
                     if n == '@':
