@@ -8,7 +8,8 @@ if root_dir not in sys.path:
 
 import aoc_utils as aoc
 from collections import deque
-
+import numpy as np
+import scipy as sp
 
 def part1(data):
     sum = 0
@@ -88,6 +89,59 @@ def part1(data):
 
 def part2(data):
     sum = 0
+    for line in data.splitlines():
+        lights = []
+        buttons = []
+        joltages = []
+        i = -1
+        button = []
+        for c in line:
+            if c == '[':
+                i += 1
+                continue
+            if c == ']':
+                i += 1
+                continue
+            if c == '(':
+                i += 1
+                continue
+            if c == ')':
+                buttons.append(button)
+                button = []
+                i -= 1
+                continue
+            if c == '{':
+                i += 2
+                continue
+            if c == '}':
+                break
+            if i == 0:
+                lights.append(c)
+            if i == 2:
+                button.append(c)
+            if i == 3:
+                joltages.append(c)
+        n_buttons = []
+        for button in buttons:
+            b = []
+            for x in ''.join(button).split(','):
+                b.append(int(x))
+            n_buttons.append(b)
+        buttons = n_buttons
+        n_joltages = []
+        for joltage in ''.join(joltages).split(','):
+            n_joltages.append(int(joltage))
+        joltages = n_joltages
+
+        coefficients = []
+        for b in buttons:
+            coefficient = [0] * len(joltages)
+            for bb in b:
+                coefficient[bb] += 1
+            coefficients.append(coefficient)
+        result = sp.optimize.linprog([1] * len(buttons), A_eq=np.transpose(coefficients), b_eq=joltages, integrality=1)
+        sum += int(result.fun)
+        
 
     return sum
 
