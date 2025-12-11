@@ -40,3 +40,23 @@ def merge_intervals(intervals):
 
     merged.append((current_start, current_end, *rest))
     return merged
+
+
+def time_it(f):
+    def wrap(*args, **kwargs):
+        import time
+        start = time.perf_counter_ns()
+        res = f(*args, **kwargs)
+        ns = time.perf_counter_ns() - start
+        formatted_time = ''
+        if ns < 1_000:
+            formatted_time = f"{ns} ns"
+        elif ns < 1_000_000:
+            formatted_time = f"{ns / 1_000:.3f} µs"
+        elif ns < 1_000_000_000:
+            formatted_time = f"{ns / 1_000_000:.3f} ms"
+        else:
+            formatted_time = f"{ns / 1_000_000_000:.3f} s"
+        print(f'{f.__name__} took {formatted_time}')
+        return res
+    return wrap
